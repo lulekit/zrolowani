@@ -1,20 +1,28 @@
 @import 'tailwindcss';
 
-/* Paleta i tokeny marki „Zrolowani" — kosmiczno-fioletowa identyfikacja.
-   Wartości do dopracowania na etapie projektu wizualnego (M2). */
 @theme {
-  --color-brand-950: #1a0b2e;
-  --color-brand-900: #2b1055;
-  --color-brand-800: #3b1578;
+  --color-brand-950: #0b0616;
+  --color-brand-900: #120a24;
+  --color-brand-800: #241046;
   --color-brand-700: #5a189a;
   --color-brand-600: #7b2cbf;
-  --color-brand-500: #9d4edd;
   --color-brand-400: #c77dff;
-  --color-accent: #ffd60a;
+  --color-accent: #f4b43f;
+  --color-paper: #ffffff;
+  --color-paper-lav: #f6f3fc;
+  --color-ink: #1c1233;
+  --color-ink-soft: #5c5470;
 
-  --font-sans: 'Poppins', ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-body), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-heading), ui-sans-serif, system-ui, sans-serif;
 }
 
 html {
   scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
 }

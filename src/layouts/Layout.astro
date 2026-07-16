@@ -1,15 +1,15 @@
 ---
 import '../styles/global.css';
+import { Font } from 'astro:assets';
+import { buildMeta } from '../lib/seo';
 
 interface Props {
   title?: string;
   description?: string;
+  path?: string;
 }
-
-const {
-  title = 'Zrolowani — imprezowa gra planszowa',
-  description = 'Prezydent, superbohater, a może kosmonauta? Zrolowani to szybka, imprezowa gra, w której dopasowujesz znajomych do zwariowanych ról.',
-} = Astro.props;
+const { title, description, path } = Astro.props;
+const meta = buildMeta({ title, description, path });
 ---
 
 <!doctype html>
@@ -18,13 +18,18 @@ const {
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <title>{title}</title>
-    <meta name="description" content={description} />
-    <meta property="og:title" content={title} />
-    <meta property="og:description" content={description} />
+    <link rel="canonical" href={meta.canonical} />
+    <title>{meta.title}</title>
+    <meta name="description" content={meta.description} />
     <meta property="og:type" content="website" />
+    <meta property="og:title" content={meta.title} />
+    <meta property="og:description" content={meta.description} />
+    <meta property="og:url" content={meta.canonical} />
+    <meta property="og:image" content={meta.ogImage} />
+    <Font cssVariable="--font-heading" preload />
+    <Font cssVariable="--font-body" />
   </head>
-  <body class="bg-brand-950 min-h-screen text-white antialiased">
+  <body class="bg-brand-950 min-h-screen font-sans text-white antialiased">
     <slot />
   </body>
 </html>
