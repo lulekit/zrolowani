@@ -22,3 +22,8 @@ worker-configuration.d.ts
 npm-debug.log*
 .DS_Store
 Thumbs.db
+
+# playwright
+test-results/
+playwright-report/
+/.playwright/

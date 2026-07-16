@@ -1,10 +1,11 @@
-/// <reference types="vitest/config" />
 import type { Plugin, PluginOption } from 'vite';
 import { getViteConfig, passthroughImageService } from 'astro/config';
+import { configDefaults } from 'vitest/config';
 
 // passthroughImageService: <Image> renderuje się w testach bez przetwarzania.
 const resolveConfig = getViteConfig(
-  { test: { environment: 'node' } },
+  // e2e/** to testy Playwright (uruchamiane przez `pnpm test:e2e`), nie Vitest.
+  { test: { environment: 'node', exclude: [...configDefaults.exclude, 'e2e/**'] } },
   { image: { service: passthroughImageService() } },
 );
 
