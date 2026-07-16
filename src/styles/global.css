@@ -27,19 +27,22 @@ html {
   }
 }
 
-[data-reveal] {
+/* Ukryty stan początkowy tylko przy dostępnym JS (klasa `.js` dodawana
+   synchronicznie w <head>, patrz Layout.astro). Bez JS treść jest od razu
+   w pełni widoczna — progresywne wzbogacanie zamiast domyślnego ukrywania. */
+.js [data-reveal] {
   opacity: 0;
   transform: translateY(16px);
   transition:
     opacity 0.5s ease,
     transform 0.5s ease;
 }
-[data-reveal].is-in {
+.js [data-reveal].is-in {
   opacity: 1;
   transform: none;
 }
 @media (prefers-reduced-motion: reduce) {
-  [data-reveal] {
+  .js [data-reveal] {
     opacity: 1;
     transform: none;
     transition: none;

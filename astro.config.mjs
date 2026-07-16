@@ -13,8 +13,8 @@ export default defineConfig({
       provider: fontProviders.google(),
       name: 'Montserrat',
       cssVariable: '--font-heading',
-      weights: [600, 800, 900],
-      styles: ['normal', 'italic'],
+      weights: [600, 800],
+      styles: ['normal'],
       subsets: ['latin', 'latin-ext'],
     },
     {

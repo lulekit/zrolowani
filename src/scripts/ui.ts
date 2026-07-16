@@ -17,11 +17,13 @@ toggle?.addEventListener('click', () => {
   if (open) menu.removeAttribute('hidden');
   else menu.setAttribute('hidden', '');
   toggle.setAttribute('aria-expanded', String(open));
+  toggle.setAttribute('aria-label', open ? 'Zamknij menu' : 'Otwórz menu');
 });
 menu?.querySelectorAll('[data-nav-link]').forEach((link) =>
   link.addEventListener('click', () => {
     menu.setAttribute('hidden', '');
     toggle?.setAttribute('aria-expanded', 'false');
+    toggle?.setAttribute('aria-label', 'Otwórz menu');
   }),
 );
 
