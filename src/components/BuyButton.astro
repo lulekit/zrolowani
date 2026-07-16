@@ -1,0 +1,31 @@
+---
+import { resolveBuy } from '../lib/buy';
+import { ALLEGRO_URL } from '../lib/site';
+
+interface Props {
+  url?: string;
+  label?: string;
+  class?: string;
+}
+const { url = ALLEGRO_URL, label, class: cls = '' } = Astro.props;
+const state = resolveBuy(url);
+const text = state.enabled && label ? label : state.label;
+const base =
+  'inline-flex items-center justify-center rounded-xl bg-accent px-7 py-3 font-display font-extrabold tracking-wide text-brand-950 transition hover:brightness-105 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent';
+---
+
+{
+  state.enabled ? (
+    <a href={state.href} target="_blank" rel="noopener noreferrer" class={`${base} ${cls}`}>
+      {text}
+    </a>
+  ) : (
+    <span
+      class={`${base} cursor-not-allowed opacity-60 ${cls}`}
+      aria-disabled="true"
+      title="Sprzedaż wkrótce"
+    >
+      {text}
+    </span>
+  )
+}
