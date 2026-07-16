@@ -4,5 +4,6 @@ node_modules/
 .wrangler/
 migrations/
 package-lock.json
+pnpm-lock.yaml
 worker-configuration.d.ts
 docs/

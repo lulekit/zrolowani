@@ -8,23 +8,27 @@ Astro 7 · Tailwind CSS 4 · Cloudflare (Pages/Workers + D1) · Drizzle ORM · P
 
 ## Uruchomienie
 
+Menedżer pakietów: **pnpm** (przez corepack — `corepack enable`).
+
 ```bash
-npm install
+pnpm install
 cp .dev.vars.example .dev.vars   # uzupełnij sekrety (Faza 2)
-npm run dev
+pnpm dev
 ```
 
 ## Skrypty
 
-| Skrypt                     | Opis                                                 |
-| -------------------------- | ---------------------------------------------------- |
-| `npm run dev`              | serwer deweloperski (Astro)                          |
-| `npm run build`            | build produkcyjny do `dist/`                         |
-| `npm run preview`          | build + lokalny runtime Cloudflare (wrangler)        |
-| `npm run cf-typegen`       | generuje typy bindings (`worker-configuration.d.ts`) |
-| `npm run db:generate`      | generuje migracje SQL z `src/db/schema.ts`           |
-| `npm run db:migrate:local` | nakłada migracje na lokalną D1                       |
-| `npm run db:migrate`       | nakłada migracje na zdalną D1                        |
+| Skrypt                  | Opis                                                 |
+| ----------------------- | ---------------------------------------------------- |
+| `pnpm dev`              | serwer deweloperski (Astro)                          |
+| `pnpm build`            | build produkcyjny do `dist/`                         |
+| `pnpm preview`          | build + lokalny runtime Cloudflare (wrangler)        |
+| `pnpm lint`             | ESLint                                               |
+| `pnpm format`           | Prettier (zapis)                                     |
+| `pnpm cf-typegen`       | generuje typy bindings (`worker-configuration.d.ts`) |
+| `pnpm db:generate`      | generuje migracje SQL z `src/db/schema.ts`           |
+| `pnpm db:migrate:local` | nakłada migracje na lokalną D1                       |
+| `pnpm db:migrate`       | nakłada migracje na zdalną D1                        |
 
 ## Struktura
 
@@ -45,7 +49,7 @@ src/
 
 ## Konfiguracja Cloudflare (Faza 2)
 
-1. `npx wrangler d1 create zrolowani-db` → wklej `database_id` do `wrangler.jsonc`.
-2. `npm run db:generate && npm run db:migrate` — utworzenie tabel.
-3. Sekrety produkcyjne: `npx wrangler secret put P24_MERCHANT_ID` itd.
+1. `pnpm exec wrangler d1 create zrolowani-db` → wklej `database_id` do `wrangler.jsonc`.
+2. `pnpm db:generate && pnpm db:migrate` — utworzenie tabel.
+3. Sekrety produkcyjne: `pnpm exec wrangler secret put P24_MERCHANT_ID` itd.
 4. `/admin` chroniony przez Cloudflare Access.
