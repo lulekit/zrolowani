@@ -1,0 +1,50 @@
+---
+import { Image } from 'astro:assets';
+import logo from '../assets/logo.png';
+import slogan from '../assets/slogan.png';
+import BuyButton from './BuyButton.astro';
+
+const facts = ['2–6 graczy', '20–60 min', '14+'];
+---
+
+<section
+  id="top"
+  class="relative overflow-hidden bg-[radial-gradient(140%_100%_at_50%_-10%,#241046_0%,#0b0616_62%)] px-4 pt-28 pb-20 text-center"
+>
+  <div
+    aria-hidden="true"
+    class="pointer-events-none absolute inset-0 [background-image:radial-gradient(1px_1px_at_20%_25%,#fff,transparent),radial-gradient(1px_1px_at_72%_16%,rgba(255,255,255,.6),transparent),radial-gradient(1px_1px_at_50%_66%,rgba(255,255,255,.5),transparent),radial-gradient(1px_1px_at_85%_60%,rgba(255,255,255,.5),transparent)] opacity-70"
+  >
+  </div>
+
+  <div class="relative mx-auto max-w-3xl">
+    <Image src={logo} alt="Zrolowani" width={420} class="mx-auto h-auto w-64 sm:w-80" />
+    <Image
+      src={slogan}
+      alt="Prezydent, superbohater, a może kosmonauta?"
+      width={720}
+      class="mx-auto mt-6 h-auto w-72 -rotate-3 sm:w-[26rem]"
+    />
+    <p class="mx-auto mt-6 max-w-md text-white/70">
+      Imprezowa gra, w której dopasowujesz znajomych do zwariowanych ról.
+    </p>
+    <div class="mt-8 flex flex-wrap justify-center gap-3">
+      <BuyButton />
+      <a
+        href="#zasady"
+        class="font-display inline-flex items-center justify-center rounded-xl border border-white/25 px-5 py-3 font-semibold text-white transition hover:bg-white/10"
+        >Jak grać</a
+      >
+    </div>
+    <div class="mt-8 flex flex-wrap justify-center gap-x-4 gap-y-1 text-sm text-white/55">
+      {
+        facts.map((f, i) => (
+          <>
+            {i > 0 && <span class="opacity-40">•</span>}
+            <span>{f}</span>
+          </>
+        ))
+      }
+    </div>
+  </div>
+</section>
