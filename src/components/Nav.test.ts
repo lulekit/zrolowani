@@ -8,6 +8,7 @@ test('nav zawiera kotwice sekcji i KUP', async () => {
   expect(html).toContain('href="#gra"');
   expect(html).toContain('href="#zasady"');
   expect(html).toContain('href="#pudelko"');
-  expect(html).toContain('KUP');
+  expect(html).toContain('bg-accent'); // BuyButton renderuje się w nawigacji
+  expect(html).toContain('Wkrótce w sprzedaży'); // stan przy pustym ALLEGRO_URL
   expect(html).toContain('data-nav-toggle');
 });
