@@ -1,0 +1,26 @@
+---
+const legal = [
+  { href: '/regulamin', label: 'Regulamin' },
+  { href: '/polityka-prywatnosci', label: 'Polityka prywatności' },
+  { href: '/odstapienie-od-umowy', label: 'Odstąpienie od umowy' },
+  { href: '/zwroty', label: 'Zwroty' },
+];
+---
+
+<footer class="bg-[#080410] px-4 py-10 text-sm text-white/45">
+  <div class="mx-auto max-w-5xl">
+    <p>
+      <strong class="text-white/70">Netictech S.A.</strong> · Plac Andersa 7, 61-894 Poznań, Polska
+    </p>
+    <nav class="mt-3 flex flex-wrap gap-x-4 gap-y-2" aria-label="Dokumenty">
+      {
+        legal.map((l) => (
+          <a href={l.href} class="transition hover:text-white/80">
+            {l.label}
+          </a>
+        ))
+      }
+    </nav>
+    <p class="mt-4 text-white/30">© 2026 Netictech S.A. Wszelkie prawa zastrzeżone.</p>
+  </div>
+</footer>
