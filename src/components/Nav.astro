@@ -1,0 +1,61 @@
+---
+import { Image } from 'astro:assets';
+import logo from '../assets/logo.png';
+import BuyButton from './BuyButton.astro';
+
+const links = [
+  { href: '#gra', label: 'Gra' },
+  { href: '#zasady', label: 'Zasady' },
+  { href: '#pudelko', label: 'Pudełko' },
+];
+---
+
+<header data-nav class="fixed inset-x-0 top-0 z-50 transition-colors duration-300">
+  <nav class="mx-auto flex max-w-6xl items-center justify-between px-4 py-3" aria-label="Główna">
+    <a href="#top" class="flex items-center" aria-label="Zrolowani — strona główna">
+      <Image src={logo} alt="Zrolowani" height={28} class="h-7 w-auto" />
+    </a>
+
+    <div class="hidden items-center gap-6 md:flex">
+      {
+        links.map((l) => (
+          <a href={l.href} class="text-sm text-white/70 transition hover:text-white">
+            {l.label}
+          </a>
+        ))
+      }
+      <BuyButton url="#" label="KUP" class="!px-5 !py-2 text-sm" />
+    </div>
+
+    <button
+      data-nav-toggle
+      type="button"
+      class="text-white md:hidden"
+      aria-expanded="false"
+      aria-controls="nav-menu"
+      aria-label="Otwórz menu"
+    >
+      <span class="block h-0.5 w-6 bg-white"></span>
+      <span class="mt-1.5 block h-0.5 w-6 bg-white"></span>
+      <span class="mt-1.5 block h-0.5 w-6 bg-white"></span>
+    </button>
+  </nav>
+
+  <div
+    id="nav-menu"
+    data-nav-menu
+    hidden
+    class="bg-brand-950/95 border-t border-white/10 px-4 py-4 md:hidden"
+  >
+    <div class="flex flex-col gap-3">
+      {
+        links.map((l) => (
+          <a href={l.href} class="text-white/80" data-nav-link>
+            {l.label}
+          </a>
+        ))
+      }
+      <BuyButton url="#" label="KUP" class="mt-2 w-full" />
+    </div>
+  </div>
+</header>
