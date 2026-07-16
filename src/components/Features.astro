@@ -1,0 +1,27 @@
+---
+import SectionLabel from './SectionLabel.astro';
+
+const features = [
+  { title: 'Przystępne zasady', desc: 'Ogarniasz w minutę, grasz od razu.' },
+  { title: 'Wysoka regrywalność', desc: '210 kart — każda partia jest inna.' },
+  { title: 'Humor', desc: 'Zwariowane role i mnóstwo śmiechu.' },
+  { title: 'Zachęca do dyskusji', desc: 'Remis? Rozstrzyga burzliwa debata.' },
+  { title: 'Szybka rozgrywka', desc: 'Idealna na rozkręcenie spotkania.' },
+];
+---
+
+<section class="bg-paper-lav text-ink px-4 py-16">
+  <div class="mx-auto max-w-5xl">
+    <SectionLabel text="Dlaczego pokochasz" />
+    <div class="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      {
+        features.map((f) => (
+          <div class="border-brand-400/25 bg-paper rounded-2xl border p-5">
+            <h3 class="font-display text-ink text-lg font-extrabold">{f.title}</h3>
+            <p class="text-ink-soft mt-1 text-sm">{f.desc}</p>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
