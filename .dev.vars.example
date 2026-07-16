@@ -1,0 +1,19 @@
+# Skopiuj do `.dev.vars` i uzupełnij (plik .dev.vars jest w .gitignore).
+# Na produkcji ustaw przez: npx wrangler secret put NAZWA
+
+# --- Przelewy24 ---
+P24_MERCHANT_ID=
+P24_POS_ID=
+P24_CRC=
+P24_API_KEY=
+# "sandbox" na czas testów, "secure" na produkcji
+P24_ENV=sandbox
+
+# --- Resend ---
+RESEND_API_KEY=
+MAIL_FROM=zamowienia@zrolowani.pl
+MAIL_SHOP_NOTIFY=sklep@zrolowani.pl
+
+# --- Sklep ---
+PUBLIC_SITE_URL=http://localhost:4321
+ORDER_PRICE_GROSZE=0

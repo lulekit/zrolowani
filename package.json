@@ -1,0 +1,42 @@
+{
+  "name": "zrolowani",
+  "type": "module",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro build && wrangler dev",
+    "astro": "astro",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "cf-typegen": "wrangler types",
+    "db:generate": "drizzle-kit generate",
+    "db:migrate:local": "wrangler d1 migrations apply zrolowani-db --local",
+    "db:migrate": "wrangler d1 migrations apply zrolowani-db --remote"
+  },
+  "dependencies": {
+    "@astrojs/cloudflare": "^14.1.3",
+    "astro": "^7.1.0",
+    "drizzle-orm": "^0.45.2",
+    "resend": "^6.17.2"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^5.20260710.1",
+    "@eslint/js": "^10.0.1",
+    "@tailwindcss/vite": "^4.3.3",
+    "drizzle-kit": "^0.31.10",
+    "eslint": "^10.7.0",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-astro": "^3.0.1",
+    "prettier": "^3.9.5",
+    "prettier-plugin-astro": "^0.14.1",
+    "prettier-plugin-tailwindcss": "^0.8.1",
+    "tailwindcss": "^4.3.3",
+    "typescript": "^5.9.0",
+    "typescript-eslint": "^8.64.0",
+    "wrangler": "^4.111.0"
+  }
+}

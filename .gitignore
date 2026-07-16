@@ -1,0 +1,21 @@
+# build output
+dist/
+.astro/
+
+# dependencies
+node_modules/
+
+# cloudflare / wrangler
+.wrangler/
+worker-configuration.d.ts
+
+# secrets & local env
+.dev.vars
+.env
+.env.*
+!.env.example
+
+# logs & os
+npm-debug.log*
+.DS_Store
+Thumbs.db

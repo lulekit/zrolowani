@@ -1,0 +1,21 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "zrolowani",
+  "compatibility_date": "2026-07-16",
+  "compatibility_flags": ["nodejs_compat"],
+  "assets": {
+    "directory": "./dist",
+  },
+  // Baza zamówień (Faza 2). Utworzenie: `npx wrangler d1 create zrolowani-db`
+  // i wklejenie zwróconego database_id poniżej.
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "zrolowani-db",
+      "database_id": "PLACEHOLDER_DATABASE_ID",
+      "migrations_dir": "./migrations",
+    },
+  ],
+  // Sekrety (P24, Resend) ustawiane przez `npx wrangler secret put NAZWA`,
+  // lokalnie przez plik `.dev.vars` (patrz .dev.vars.example).
+}

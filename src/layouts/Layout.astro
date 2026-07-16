@@ -1,0 +1,30 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = 'Zrolowani — imprezowa gra planszowa',
+  description = 'Prezydent, superbohater, a może kosmonauta? Zrolowani to szybka, imprezowa gra, w której dopasowujesz znajomych do zwariowanych ról.',
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="pl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+  </head>
+  <body class="bg-brand-950 min-h-screen text-white antialiased">
+    <slot />
+  </body>
+</html>

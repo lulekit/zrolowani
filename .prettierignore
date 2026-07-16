@@ -1,0 +1,8 @@
+dist/
+.astro/
+node_modules/
+.wrangler/
+migrations/
+package-lock.json
+worker-configuration.d.ts
+docs/
