@@ -1,0 +1,27 @@
+---
+import { Image } from 'astro:assets';
+import boxElements from '../assets/box-elements.jpg';
+import SectionLabel from './SectionLabel.astro';
+---
+
+<section id="gra" class="bg-paper text-ink scroll-mt-20 px-4 py-16">
+  <div class="mx-auto grid max-w-5xl items-center gap-8 md:grid-cols-2">
+    <div>
+      <SectionLabel text="O co chodzi" />
+      <h2 class="font-display text-ink mt-2 text-3xl font-extrabold">
+        Zgadnij, jak zagłosuje większość
+      </h2>
+      <p class="text-ink-soft mt-4 leading-relaxed">
+        Dopasuj graczy do zwariowanych ról w tajnym głosowaniu, zdobywaj punkty i wywołuj burzliwe
+        dyskusje, które decydują o zwycięstwie. Poznaj, jak widzą Cię znajomi — i czy znasz ich tak
+        dobrze, jak ci się wydaje.
+      </p>
+    </div>
+    <Image
+      src={boxElements}
+      alt="Pudełko gry Zrolowani wraz z elementami"
+      width={720}
+      class="h-auto w-full rounded-2xl"
+    />
+  </div>
+</section>
