@@ -1,0 +1,28 @@
+---
+import { Image } from 'astro:assets';
+import SectionLabel from './SectionLabel.astro';
+import board from '../assets/board.jpg';
+import friends from '../assets/friends.jpg';
+import hands from '../assets/hands.jpg';
+import box from '../assets/box.jpg';
+
+const photos = [
+  { src: friends, alt: 'Znajomi grający w Zrolowani przy stole' },
+  { src: board, alt: 'Plansza gry Zrolowani' },
+  { src: hands, alt: 'Dłonie graczy z żetonami i kartami Zrolowani' },
+  { src: box, alt: 'Pudełko gry Zrolowani' },
+];
+---
+
+<section class="bg-paper text-ink px-4 py-16">
+  <div class="mx-auto max-w-5xl">
+    <SectionLabel text="Galeria" />
+    <div class="mt-6 grid gap-4 sm:grid-cols-2">
+      {
+        photos.map((p) => (
+          <Image src={p.src} alt={p.alt} width={720} class="h-56 w-full rounded-2xl object-cover" />
+        ))
+      }
+    </div>
+  </div>
+</section>
