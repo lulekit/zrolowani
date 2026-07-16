@@ -1,0 +1,38 @@
+---
+import { Image } from 'astro:assets';
+import SectionLabel from './SectionLabel.astro';
+import elements from '../assets/elements.jpg';
+
+const items = [
+  { n: '210', label: 'kart' },
+  { n: '36', label: 'tabliczek' },
+  { n: '100', label: 'żetonów' },
+  { n: '1', label: 'plansza' },
+  { n: '2', label: 'mazaki ścieralne' },
+  { n: '1', label: 'instrukcja' },
+];
+---
+
+<section id="pudelko" class="bg-paper-lav text-ink scroll-mt-20 px-4 py-16">
+  <div class="mx-auto grid max-w-5xl items-center gap-8 md:grid-cols-2">
+    <Image
+      src={elements}
+      alt="Elementy gry Zrolowani: karty, tabliczki, żetony i mazaki"
+      width={720}
+      class="order-2 h-auto w-full rounded-2xl md:order-1"
+    />
+    <div class="order-1 md:order-2">
+      <SectionLabel text="Co w pudełku" />
+      <ul class="mt-6 grid grid-cols-2 gap-3">
+        {
+          items.map((it) => (
+            <li class="border-brand-400/25 bg-paper rounded-xl border p-4">
+              <span class="font-display text-ink text-xl font-extrabold">{it.n}</span>
+              <span class="text-ink-soft ml-1 text-sm">{it.label}</span>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </div>
+</section>
