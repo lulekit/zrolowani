@@ -1,25 +1,32 @@
 ---
 import Layout from '../layouts/Layout.astro';
-
-// SZKIELET (M1). Pełna, dopracowana strona onepage powstanie w M2
-// na bazie grafik i tekstów z katalogu docs/.
+import Nav from '../components/Nav.astro';
+import Hero from '../components/Hero.astro';
+import About from '../components/About.astro';
+import Features from '../components/Features.astro';
+import HowToPlay from '../components/HowToPlay.astro';
+import BoxContents from '../components/BoxContents.astro';
+import Gallery from '../components/Gallery.astro';
+import Studio from '../components/Studio.astro';
+import FinalCta from '../components/FinalCta.astro';
+import Footer from '../components/Footer.astro';
 ---
 
 <Layout>
-  <main
-    class="mx-auto flex min-h-screen max-w-3xl flex-col items-center justify-center gap-6 px-6 text-center"
-  >
-    <p class="text-brand-400 text-sm tracking-widest uppercase">Netictech S.A.</p>
-    <h1 class="text-5xl font-bold text-balance sm:text-6xl">Zrolowani</h1>
-    <p class="text-brand-400 text-xl">Prezydent, superbohater, a&nbsp;może kosmonauta?</p>
-    <p class="max-w-xl text-white/70">
-      Imprezowa gra, w której dopasowujesz wszystkich graczy do zwariowanych ról. Szybka rozgrywka,
-      humor i&nbsp;mnóstwo dyskusji.
-    </p>
-    <span
-      class="border-brand-600 bg-brand-800/50 mt-4 rounded-full border px-5 py-2 text-sm text-white/60"
-    >
-      🚧 Szkielet projektu — pełna strona w przygotowaniu (M2)
-    </span>
+  <Nav />
+  <main>
+    <Hero />
+    <div data-reveal><About /></div>
+    <div data-reveal><Features /></div>
+    <div data-reveal><HowToPlay /></div>
+    <div data-reveal><BoxContents /></div>
+    <div data-reveal><Gallery /></div>
+    <div data-reveal><Studio /></div>
+    <FinalCta />
   </main>
+  <Footer />
 </Layout>
+
+<script>
+  import '../scripts/ui.ts';
+</script>
