@@ -29,6 +29,14 @@ pnpm dev
 | `pnpm db:generate`      | generuje migracje SQL z `src/db/schema.ts`           |
 | `pnpm db:migrate:local` | nakłada migracje na lokalną D1                       |
 | `pnpm db:migrate`       | nakłada migracje na zdalną D1                        |
+| `pnpm vitest run`       | uruchomia testy (Vitest)                             |
+
+## Testy
+
+Testy jednostkowe (`src/**/*.test.ts`) uruchamiane przez **Vitest** + **Astro Container API**.
+`vitest.config.ts` filtruje pluginy dev-servera i adaptera Cloudflare, aby uniknąć crasha podczas startu Vitestu
+(bug [`withastro/astro#15847`](https://github.com/withastro/astro/issues/15847)).
+Filtr ten nie powinien być usuwany bez uprzedniego sprawdzenia, czy bug został naprawiony.
 
 ## Struktura
 

@@ -19,7 +19,7 @@ export function buildMeta(o: {
 }): Meta {
   const title = o.title ? `${o.title} — Zrolowani` : DEFAULT_TITLE;
   const path = o.path ?? '/';
-  const canonical = `${SITE_URL}${path === '/' ? '/' : path}`;
+  const canonical = `${SITE_URL}${path}`;
   return {
     title,
     description: o.description ?? DEFAULT_DESC,
