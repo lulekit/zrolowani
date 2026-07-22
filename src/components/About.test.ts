@@ -8,5 +8,5 @@ test('about: nagłówek, opis i kotwica #gra', async () => {
   expect(html).toContain('id="gra"');
   expect(html).toContain('Zgadnij, jak zagłosuje większość');
   expect(html).toContain('tajnym głosowaniu');
-  expect(html).toContain('alt="Pudełko gry Zrolowani wraz z elementami"');
+  expect(html).toContain('alt="Pudełko gry Zrolowani"');
 });

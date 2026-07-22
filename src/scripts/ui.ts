@@ -141,3 +141,54 @@ if (popEls.length) {
   );
   popEls.forEach((el) => pio.observe(el));
 }
+
+// Galeria: lightbox z podglądem i nawigacją lewo/prawo.
+const lightbox = document.querySelector<HTMLElement>('[data-lightbox]');
+const galleryItems = [...document.querySelectorAll<HTMLAnchorElement>('[data-gallery-item]')];
+if (lightbox && galleryItems.length) {
+  const lbImg = lightbox.querySelector<HTMLImageElement>('[data-lb-img]');
+  let index = 0;
+  const render = (i: number) => {
+    index = (i + galleryItems.length) % galleryItems.length;
+    const item = galleryItems[index];
+    if (lbImg) {
+      lbImg.src = item.getAttribute('href') ?? '';
+      lbImg.alt = item.dataset.alt ?? '';
+    }
+  };
+  const openLb = (i: number) => {
+    render(i);
+    lightbox.classList.remove('hidden');
+    lightbox.classList.add('flex');
+    document.body.style.overflow = 'hidden';
+  };
+  const closeLb = () => {
+    lightbox.classList.add('hidden');
+    lightbox.classList.remove('flex');
+    document.body.style.overflow = '';
+  };
+  galleryItems.forEach((item, i) =>
+    item.addEventListener('click', (e) => {
+      e.preventDefault();
+      openLb(i);
+    }),
+  );
+  lightbox.querySelector('[data-lb-close]')?.addEventListener('click', closeLb);
+  lightbox.querySelector('[data-lb-prev]')?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    render(index - 1);
+  });
+  lightbox.querySelector('[data-lb-next]')?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    render(index + 1);
+  });
+  lightbox.addEventListener('click', (e) => {
+    if (e.target === lightbox) closeLb();
+  });
+  document.addEventListener('keydown', (e) => {
+    if (lightbox.classList.contains('hidden')) return;
+    if (e.key === 'Escape') closeLb();
+    else if (e.key === 'ArrowLeft') render(index - 1);
+    else if (e.key === 'ArrowRight') render(index + 1);
+  });
+}

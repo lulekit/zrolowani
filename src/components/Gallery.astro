@@ -4,30 +4,74 @@ import SectionLabel from './SectionLabel.astro';
 import board from '../assets/board.jpg';
 import friends from '../assets/friends.jpg';
 import hands from '../assets/hands.jpg';
-import box from '../assets/box.jpg';
+import boxElements from '../assets/box-elements.jpg';
 
 const photos = [
   { src: friends, alt: 'Znajomi grający w Zrolowani przy stole' },
   { src: board, alt: 'Plansza gry Zrolowani' },
   { src: hands, alt: 'Dłonie graczy z żetonami i kartami Zrolowani' },
-  { src: box, alt: 'Pudełko gry Zrolowani' },
+  { src: boxElements, alt: 'Pudełko gry Zrolowani wraz z elementami' },
 ];
 ---
 
 <section class="bg-paper text-ink px-4 py-16">
   <div class="mx-auto max-w-5xl">
     <SectionLabel text="Galeria" />
-    <div class="mt-6 grid gap-4 sm:grid-cols-2">
+    <ul class="mt-6 grid grid-cols-2 gap-4 sm:grid-cols-4" data-gallery>
       {
         photos.map((p) => (
-          <Image
-            src={p.src}
-            alt={p.alt}
-            width={720}
-            class="h-56 w-full rounded-2xl object-cover [clip-path:inset(1.5px_round_1rem)]"
-          />
+          <li>
+            <a
+              href={p.src.src}
+              data-gallery-item
+              data-alt={p.alt}
+              aria-label={`Powiększ zdjęcie: ${p.alt}`}
+              class="focus-visible:outline-accent group block overflow-hidden rounded-2xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"
+            >
+              <Image
+                src={p.src}
+                alt={p.alt}
+                width={640}
+                class="aspect-square w-full object-cover transition duration-300 [clip-path:inset(1.5px_round_1rem)] group-hover:scale-105"
+              />
+            </a>
+          </li>
         ))
       }
-    </div>
+    </ul>
+  </div>
+
+  <div
+    data-lightbox
+    class="fixed inset-0 z-[100] hidden items-center justify-center bg-black/85 p-4"
+    role="dialog"
+    aria-modal="true"
+    aria-label="Podgląd zdjęcia"
+  >
+    <button
+      data-lb-close
+      type="button"
+      aria-label="Zamknij podgląd"
+      class="absolute top-4 right-4 flex h-11 w-11 items-center justify-center rounded-full bg-white/10 text-2xl leading-none text-white hover:bg-white/20"
+    >
+      ✕
+    </button>
+    <button
+      data-lb-prev
+      type="button"
+      aria-label="Poprzednie zdjęcie"
+      class="absolute top-1/2 left-3 flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full bg-white/10 text-3xl leading-none text-white hover:bg-white/20 sm:left-6"
+    >
+      ‹
+    </button>
+    <img data-lb-img src="" alt="" class="max-h-[85vh] max-w-[90vw] rounded-xl object-contain" />
+    <button
+      data-lb-next
+      type="button"
+      aria-label="Następne zdjęcie"
+      class="absolute top-1/2 right-3 flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full bg-white/10 text-3xl leading-none text-white hover:bg-white/20 sm:right-6"
+    >
+      ›
+    </button>
   </div>
 </section>
