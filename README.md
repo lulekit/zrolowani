@@ -23,7 +23,7 @@ pnpm dev
 | `pnpm dev`              | serwer deweloperski (Astro)                          |
 | `pnpm build`            | build produkcyjny do `dist/`                         |
 | `pnpm preview`          | build + podgląd Workera lokalnie (wrangler dev)      |
-| `pnpm deploy`           | build + wdrożenie na Cloudflare (wrangler deploy)    |
+| `pnpm deploy:cf`        | build + wdrożenie na Cloudflare (wrangler deploy)    |
 | `pnpm lint`             | ESLint                                               |
 | `pnpm format`           | Prettier (zapis)                                     |
 | `pnpm cf-typegen`       | generuje typy bindings (`worker-configuration.d.ts`) |
@@ -68,8 +68,10 @@ używa go automatycznie. Root `wrangler.jsonc` to tylko config źródłowy (nazw
 
 ```bash
 pnpm exec wrangler login        # jednorazowo
-pnpm deploy                     # astro build && wrangler deploy
+pnpm deploy:cf                  # astro build && wrangler deploy
 ```
+
+> Nazwa `deploy:cf`, bo `pnpm deploy` to wbudowana komenda pnpm (deploy workspace’u).
 
 - Wdraża prerenderowane strony + Workera. D1 jest wyłączone (zakomentowane w
   `wrangler.jsonc`), więc nie blokuje wdrożenia.
@@ -85,7 +87,7 @@ pnpm deploy                     # astro build && wrangler deploy
    blok `d1_databases` w `wrangler.jsonc`.
 2. `pnpm db:generate && pnpm db:migrate` — utworzenie tabel.
 3. Sekrety produkcyjne: `pnpm exec wrangler secret put P24_MERCHANT_ID` itd.
-4. `pnpm deploy`.
+4. `pnpm deploy:cf`.
 5. `/admin` chroniony przez Cloudflare Access.
 
 > Uwaga: `wrangler deploy` bez `-c` korzysta z automatycznego przekierowania do
