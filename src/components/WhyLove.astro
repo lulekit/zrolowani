@@ -1,0 +1,34 @@
+---
+import { Image } from 'astro:assets';
+import friends from '../assets/friends.jpg';
+---
+
+<section class="bg-paper-lav text-ink px-4 py-16">
+  <div class="mx-auto grid max-w-5xl items-center gap-8 md:grid-cols-2">
+    <Image
+      src={friends}
+      alt="Znajomi grający w Zrolowani przy stole"
+      width={720}
+      class="h-auto w-full rounded-2xl [clip-path:inset(1.5px_round_1rem)]"
+    />
+    <div>
+      <h2 class="font-display text-ink text-3xl font-extrabold">Dlaczego pokochasz tę grę?</h2>
+      <div class="text-ink-soft mt-4 space-y-4 leading-relaxed">
+        <p>
+          Zrolowani to zabawna gra, dzięki której spojrzysz na swoich znajomych z zupełnie nowej
+          perspektywy. Jeśli szukasz szybkiej, dynamicznej rozgrywki o prostych zasadach, która
+          natychmiast rozkręci każde spotkanie — ta gra jest właśnie dla Ciebie!
+        </p>
+        <p>
+          Dowiedz się, jak postrzegają Cię inni i czy znasz swoich przyjaciół tak dobrze, jak ci się
+          wydaje. Przewiduj odpowiedzi większości i daj się ponieść kreatywnym rozmowom, które
+          często decydują o zwycięstwie.
+        </p>
+        <p>
+          W pudełku znajdziesz aż <strong class="text-ink">210 kart</strong> z unikalnymi i zabawnymi
+          rolami. Dzięki losowaniu każda rozgrywka to nowe wyzwanie, które gwarantuje świetną zabawę.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
