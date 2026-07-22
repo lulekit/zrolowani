@@ -1,6 +1,7 @@
 ---
 import logo from '../assets/logo.png';
 import slogan from '../assets/slogan.png';
+import characters from '../assets/characters.png';
 import BuyButton from './BuyButton.astro';
 
 // Logo i slogan to przezroczyste PNG-i (napisy). Serwujemy je jako oryginalne
@@ -20,7 +21,14 @@ const facts = ['2–6 graczy', '20–60 min', '14+'];
   >
   </div>
 
-  <div class="relative mx-auto max-w-3xl">
+  <img
+    src={characters.src}
+    alt=""
+    aria-hidden="true"
+    class="pointer-events-none absolute right-6 bottom-0 z-0 hidden w-[31%] max-w-md lg:block xl:right-16"
+  />
+
+  <div class="relative z-10 mx-auto max-w-3xl">
     <h1 class="sr-only">Zrolowani — imprezowa gra planszowa</h1>
     <img
       src={logo.src}
