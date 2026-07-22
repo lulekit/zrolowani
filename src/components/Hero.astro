@@ -1,8 +1,11 @@
 ---
-import { Image } from 'astro:assets';
 import logo from '../assets/logo.png';
 import slogan from '../assets/slogan.png';
 import BuyButton from './BuyButton.astro';
+
+// Logo i slogan to przezroczyste PNG-i (napisy). Serwujemy je jako oryginalne
+// pliki (plain <img>), z pominięciem stratnej konwersji do webp przez <Image> —
+// to eliminuje brzegowy artefakt skalowania (ciemna obwódka) i zachowuje cień logo.
 
 const facts = ['2–6 graczy', '20–60 min', '14+'];
 ---
@@ -19,12 +22,19 @@ const facts = ['2–6 graczy', '20–60 min', '14+'];
 
   <div class="relative mx-auto max-w-3xl">
     <h1 class="sr-only">Zrolowani — imprezowa gra planszowa</h1>
-    <Image src={logo} alt="Zrolowani" width={420} class="mx-auto h-auto w-64 sm:w-80" />
-    <Image
-      src={slogan}
+    <img
+      src={logo.src}
+      width={logo.width}
+      height={logo.height}
+      alt="Zrolowani"
+      class="mx-auto h-auto w-64 sm:w-80"
+    />
+    <img
+      src={slogan.src}
+      width={slogan.width}
+      height={slogan.height}
       alt="Prezydent, superbohater, a może kosmonauta?"
-      width={720}
-      class="mx-auto mt-6 h-auto w-72 -rotate-3 sm:w-[26rem]"
+      class="mx-auto mt-6 h-auto w-[36rem] max-w-full -rotate-3 sm:w-[52rem]"
     />
     <p class="mx-auto mt-6 max-w-md text-white/70">
       Imprezowa gra, w której dopasowujesz znajomych do zwariowanych ról.
