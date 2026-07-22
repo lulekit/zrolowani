@@ -44,18 +44,18 @@ if (!reduce) {
   document.querySelectorAll('[data-reveal]').forEach((el) => io.observe(el));
 }
 
-// Hero: migoczące gwiazdy (kanwa). Przy reduced-motion rysujemy statycznie.
-const heroStars = document.querySelector<HTMLCanvasElement>('[data-hero-stars]');
-if (heroStars) {
-  const ctx = heroStars.getContext('2d');
+// Migoczące gwiazdy (kanwy w sekcjach ciemnych: hero, CTA końcowy).
+// Przy reduced-motion rysujemy statycznie.
+const initStars = (canvas: HTMLCanvasElement) => {
+  const ctx = canvas.getContext('2d');
   let stars: { x: number; y: number; r: number; p: number; s: number }[] = [];
   let w = 0;
   let h = 0;
   let raf = 0;
   const resize = () => {
-    const rect = heroStars.getBoundingClientRect();
-    w = heroStars.width = rect.width;
-    h = heroStars.height = rect.height;
+    const rect = canvas.getBoundingClientRect();
+    w = canvas.width = rect.width;
+    h = canvas.height = rect.height;
     const count = Math.round((w * h) / 4500);
     stars = Array.from({ length: count }, () => ({
       x: Math.random() * w,
@@ -91,7 +91,8 @@ if (heroStars) {
     },
     { passive: true },
   );
-}
+};
+document.querySelectorAll<HTMLCanvasElement>('[data-stars]').forEach(initStars);
 
 // Liczby liczące (np. „Co w pudełku") — nabijają się od zera przy wejściu w kadr.
 const counters = document.querySelectorAll<HTMLElement>('[data-count]');

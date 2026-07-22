@@ -3,11 +3,18 @@ import BuyButton from './BuyButton.astro';
 ---
 
 <section
-  class="bg-[radial-gradient(140%_120%_at_50%_120%,#241046_0%,#0b0616_60%)] px-4 py-20 text-center"
+  class="relative overflow-hidden bg-[radial-gradient(140%_120%_at_50%_120%,#241046_0%,#0b0616_60%)] px-4 py-20 text-center"
 >
-  <h2 class="font-display text-3xl font-extrabold text-white">Gotowy na imprezę?</h2>
-  <p class="mt-2 text-white/60">Zrolowani czeka na Twoją ekipę.</p>
-  <div class="mt-8 flex justify-center">
-    <BuyButton />
+  <canvas
+    data-stars
+    aria-hidden="true"
+    class="pointer-events-none absolute inset-0 z-0 h-full w-full"></canvas>
+
+  <div class="relative z-10">
+    <h2 class="font-display text-3xl font-extrabold text-white">Gotowy na imprezę?</h2>
+    <p class="mt-2 text-white/60">Zrolowani czeka na Twoją ekipę.</p>
+    <div class="mt-8 flex justify-center">
+      <BuyButton />
+    </div>
   </div>
 </section>
