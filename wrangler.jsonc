@@ -3,19 +3,23 @@
   "name": "zrolowani",
   "compatibility_date": "2026-07-16",
   "compatibility_flags": ["nodejs_compat"],
-  "assets": {
-    "directory": "./dist",
-  },
-  // Baza zamówień (Faza 2). Utworzenie: `npx wrangler d1 create zrolowani-db`
-  // i wklejenie zwróconego database_id poniżej.
-  "d1_databases": [
-    {
-      "binding": "DB",
-      "database_name": "zrolowani-db",
-      "database_id": "PLACEHOLDER_DATABASE_ID",
-      "migrations_dir": "./migrations",
-    },
-  ],
-  // Sekrety (P24, Resend) ustawiane przez `npx wrangler secret put NAZWA`,
-  // lokalnie przez plik `.dev.vars` (patrz .dev.vars.example).
+
+  // To jest config ŹRÓDŁOWY. Przy `astro build` adapter @astrojs/cloudflare
+  // generuje właściwy config Workera w `dist/server/wrangler.json`
+  // (main = entry.mjs, assets = ../client, KV sesji, Images) i `wrangler deploy`
+  // używa go automatycznie (przekierowanie przez .wrangler/deploy/config.json).
+  // Dlatego NIE ustawiamy tu `main` ani `assets` — dokłada je adapter.
+  //
+  // === FAZA 2 (sprzedaż / SSR) ===
+  // Po utworzeniu bazy:  wrangler d1 create zrolowani-db
+  // wklej realne id i odkomentuj (adapter dołączy binding do configu Workera):
+  //   "d1_databases": [
+  //     {
+  //       "binding": "DB",
+  //       "database_name": "zrolowani-db",
+  //       "database_id": "<REALNE_ID>",
+  //       "migrations_dir": "./migrations"
+  //     }
+  //   ]
+  // Sekrety (P24, Resend):  wrangler secret put NAZWA  (lokalnie: .dev.vars)
 }

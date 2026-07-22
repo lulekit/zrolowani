@@ -22,7 +22,8 @@ pnpm dev
 | ----------------------- | ---------------------------------------------------- |
 | `pnpm dev`              | serwer deweloperski (Astro)                          |
 | `pnpm build`            | build produkcyjny do `dist/`                         |
-| `pnpm preview`          | build + lokalny runtime Cloudflare (wrangler)        |
+| `pnpm preview`          | build + podgląd Workera lokalnie (wrangler dev)      |
+| `pnpm deploy`           | build + wdrożenie na Cloudflare (wrangler deploy)    |
 | `pnpm lint`             | ESLint                                               |
 | `pnpm format`           | Prettier (zapis)                                     |
 | `pnpm cf-typegen`       | generuje typy bindings (`worker-configuration.d.ts`) |
@@ -55,9 +56,38 @@ src/
   styles/global.css          Tailwind + tokeny marki
 ```
 
-## Konfiguracja Cloudflare (Faza 2)
+## Wdrożenie (Cloudflare)
 
-1. `pnpm exec wrangler d1 create zrolowani-db` → wklej `database_id` do `wrangler.jsonc`.
+Przy `astro build` adapter `@astrojs/cloudflare` generuje config Workera w
+`dist/server/wrangler.json` (Worker + statyczne assety z `dist/client`) i tworzy
+przekierowanie `.wrangler/deploy/config.json`, dzięki któremu `wrangler deploy`
+używa go automatycznie. Root `wrangler.jsonc` to tylko config źródłowy (nazwa,
+`compatibility_date`, bindingi Fazy 2) — nie ustawiamy w nim `main`/`assets`.
+
+### Faza 1 — promo (statyczne strony + drobne trasy SSR jako stuby)
+
+```bash
+pnpm exec wrangler login        # jednorazowo
+pnpm deploy                     # astro build && wrangler deploy
+```
+
+- Wdraża prerenderowane strony + Workera. D1 jest wyłączone (zakomentowane w
+  `wrangler.jsonc`), więc nie blokuje wdrożenia.
+- Astro ma włączone sesje na KV (binding `SESSION`). Przy pierwszym `deploy`
+  Wrangler poprosi o utworzenie namespace KV (lub utwórz ręcznie:
+  `wrangler kv namespace create SESSION` i dodaj `id` do `wrangler.jsonc` w
+  `kv_namespaces`). `IMAGES` i `ASSETS` są automatyczne.
+- Podgląd lokalny produkcyjnego Workera: `pnpm preview`.
+
+### Faza 2 — sprzedaż (Przelewy24, D1, maile)
+
+1. `pnpm exec wrangler d1 create zrolowani-db` → wklej `database_id` i odkomentuj
+   blok `d1_databases` w `wrangler.jsonc`.
 2. `pnpm db:generate && pnpm db:migrate` — utworzenie tabel.
 3. Sekrety produkcyjne: `pnpm exec wrangler secret put P24_MERCHANT_ID` itd.
-4. `/admin` chroniony przez Cloudflare Access.
+4. `pnpm deploy`.
+5. `/admin` chroniony przez Cloudflare Access.
+
+> Uwaga: `wrangler deploy` bez `-c` korzysta z automatycznego przekierowania do
+> configu Workera. Nie uruchamiaj wranglera bezpośrednio na root `wrangler.jsonc`
+> (nie ma tam `main`/`assets`).
