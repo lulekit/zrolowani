@@ -1,12 +1,17 @@
 ---
 import logo from '../assets/logo.png';
 import slogan from '../assets/slogan.png';
-import characters from '../assets/characters.png';
+import president from '../assets/char-president.png';
+import superhero from '../assets/char-hero.png';
+import astronaut from '../assets/char-astronaut.png';
 import BuyButton from './BuyButton.astro';
 
 // Logo i slogan to przezroczyste PNG-i (napisy). Serwujemy je jako oryginalne
 // pliki (plain <img>), z pominięciem stratnej konwersji do webp przez <Image> —
 // to eliminuje brzegowy artefakt skalowania (ciemna obwódka) i zachowuje cień logo.
+//
+// Postacie: 3 osobne warstwy odtwarzające oryginalną kompozycję (odniesienie
+// 1234×625) — każda unosi się niezależnie (animate-floaty, różne opóźnienia).
 
 const facts = ['2–6 graczy', '20–60 min', '14+'];
 ---
@@ -15,18 +20,34 @@ const facts = ['2–6 graczy', '20–60 min', '14+'];
   id="top"
   class="relative overflow-hidden bg-[radial-gradient(140%_100%_at_50%_-10%,#241046_0%,#0b0616_62%)] px-4 pt-28 pb-20 text-center"
 >
+  <canvas
+    data-hero-stars
+    aria-hidden="true"
+    class="pointer-events-none absolute inset-0 z-0 h-full w-full"></canvas>
+
   <div
     aria-hidden="true"
-    class="pointer-events-none absolute inset-0 [background-image:radial-gradient(1px_1px_at_20%_25%,#fff,transparent),radial-gradient(1px_1px_at_72%_16%,rgba(255,255,255,.6),transparent),radial-gradient(1px_1px_at_50%_66%,rgba(255,255,255,.5),transparent),radial-gradient(1px_1px_at_85%_60%,rgba(255,255,255,.5),transparent)] opacity-70"
+    class="pointer-events-none absolute right-6 bottom-0 z-0 hidden aspect-[1234/625] w-[40%] max-w-xl lg:block xl:right-16"
   >
+    <img
+      src={president.src}
+      alt=""
+      class="animate-floaty absolute"
+      style="left:0%;top:3.36%;width:29.9%;animation-delay:0s"
+    />
+    <img
+      src={superhero.src}
+      alt=""
+      class="animate-floaty absolute"
+      style="left:34.85%;top:0%;width:31.12%;animation-delay:.7s"
+    />
+    <img
+      src={astronaut.src}
+      alt=""
+      class="animate-floaty absolute"
+      style="left:68.56%;top:3.68%;width:31.44%;animation-delay:1.4s"
+    />
   </div>
-
-  <img
-    src={characters.src}
-    alt=""
-    aria-hidden="true"
-    class="pointer-events-none absolute right-6 bottom-0 z-0 hidden w-[40%] max-w-xl lg:block xl:right-16"
-  />
 
   <div class="relative z-10 mx-auto max-w-3xl">
     <h1 class="sr-only">Zrolowani — imprezowa gra planszowa</h1>

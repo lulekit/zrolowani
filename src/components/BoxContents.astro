@@ -27,7 +27,9 @@ const items = [
         {
           items.map((it) => (
             <li class="border-brand-400/25 bg-paper rounded-xl border p-4">
-              <span class="font-display text-ink text-xl font-extrabold">{it.n}</span>
+              <span class="font-display text-ink text-xl font-extrabold" data-count={it.n}>
+                {it.n}
+              </span>
               <span class="text-ink-soft ml-1 text-sm">{it.label}</span>
             </li>
           ))

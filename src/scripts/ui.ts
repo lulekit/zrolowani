@@ -43,3 +43,101 @@ if (!reduce) {
   );
   document.querySelectorAll('[data-reveal]').forEach((el) => io.observe(el));
 }
+
+// Hero: migoczące gwiazdy (kanwa). Przy reduced-motion rysujemy statycznie.
+const heroStars = document.querySelector<HTMLCanvasElement>('[data-hero-stars]');
+if (heroStars) {
+  const ctx = heroStars.getContext('2d');
+  let stars: { x: number; y: number; r: number; p: number; s: number }[] = [];
+  let w = 0;
+  let h = 0;
+  let raf = 0;
+  const resize = () => {
+    const rect = heroStars.getBoundingClientRect();
+    w = heroStars.width = rect.width;
+    h = heroStars.height = rect.height;
+    const count = Math.round((w * h) / 4500);
+    stars = Array.from({ length: count }, () => ({
+      x: Math.random() * w,
+      y: Math.random() * h,
+      r: Math.random() * 1.3 + 0.3,
+      p: Math.random() * Math.PI * 2,
+      s: Math.random() * 0.03 + 0.008,
+    }));
+  };
+  const draw = () => {
+    if (!ctx) return;
+    ctx.clearRect(0, 0, w, h);
+    ctx.fillStyle = '#ffffff';
+    for (const st of stars) {
+      if (!reduce) st.p += st.s;
+      const a = reduce ? 0.55 : 0.35 + Math.sin(st.p) * 0.35;
+      ctx.globalAlpha = Math.max(0, a);
+      ctx.beginPath();
+      ctx.arc(st.x, st.y, st.r, 0, Math.PI * 2);
+      ctx.fill();
+    }
+    ctx.globalAlpha = 1;
+    if (!reduce) raf = requestAnimationFrame(draw);
+  };
+  resize();
+  draw();
+  window.addEventListener(
+    'resize',
+    () => {
+      cancelAnimationFrame(raf);
+      resize();
+      draw();
+    },
+    { passive: true },
+  );
+}
+
+// Liczby liczące (np. „Co w pudełku") — nabijają się od zera przy wejściu w kadr.
+const counters = document.querySelectorAll<HTMLElement>('[data-count]');
+if (counters.length) {
+  const countTo = (el: HTMLElement) => {
+    const target = Number(el.dataset.count);
+    if (reduce || !Number.isFinite(target) || target < 10) {
+      el.textContent = el.dataset.count ?? '';
+      return;
+    }
+    const dur = 1100;
+    const t0 = performance.now();
+    const step = (t: number) => {
+      const k = Math.min(1, (t - t0) / dur);
+      const eased = 1 - Math.pow(1 - k, 3);
+      el.textContent = String(Math.round(target * eased));
+      if (k < 1) requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
+  };
+  const cio = new IntersectionObserver(
+    (entries) => {
+      for (const e of entries) {
+        if (!e.isIntersecting) continue;
+        cio.unobserve(e.target);
+        countTo(e.target as HTMLElement);
+      }
+    },
+    { threshold: 0.5 },
+  );
+  counters.forEach((el) => cio.observe(el));
+}
+
+// Sprężyste wejście („Jak grać") — pop kroków przy wejściu w kadr.
+const popEls = document.querySelectorAll('[data-pop]');
+if (popEls.length) {
+  const pio = new IntersectionObserver(
+    (entries) => {
+      for (const e of entries) {
+        if (e.isIntersecting) {
+          e.target.classList.add('is-pop');
+          pio.unobserve(e.target);
+        }
+      }
+    },
+    { threshold: 0.2 },
+  );
+  popEls.forEach((el) => pio.observe(el));
+}
