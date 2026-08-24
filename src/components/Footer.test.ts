@@ -2,13 +2,18 @@ import { experimental_AstroContainer as AstroContainer } from 'astro/container';
 import { expect, test } from 'vitest';
 import Footer from './Footer.astro';
 
-test('stopka: dane producenta i linki prawne', async () => {
+test('stopka: dane producenta', async () => {
   const container = await AstroContainer.create();
   const html = await container.renderToString(Footer);
   expect(html).toContain('Netictech S.A.');
   expect(html).toContain('Plac Andersa 7');
-  expect(html).toContain('href="/regulamin"');
-  expect(html).toContain('href="/polityka-prywatnosci"');
-  expect(html).toContain('href="/odstapienie-od-umowy"');
-  expect(html).toContain('href="/zwroty"');
+});
+
+test('stopka: linki prawne są ukryte (zakomentowane)', async () => {
+  const container = await AstroContainer.create();
+  const html = await container.renderToString(Footer);
+  expect(html).not.toContain('href="/regulamin"');
+  expect(html).not.toContain('href="/polityka-prywatnosci"');
+  expect(html).not.toContain('href="/odstapienie-od-umowy"');
+  expect(html).not.toContain('href="/zwroty"');
 });
