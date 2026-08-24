@@ -49,6 +49,23 @@ html {
   }
 }
 
+/* Logo w nawigacji: na samej górze ukryte (żeby nie dublować wielkiego logo
+   z hero), pojawia się dopiero po przewinięciu (klasa `is-scrolled` z ui.ts).
+   Ukrywamy tylko przy dostępnym JS — bez JS logo pozostaje widoczne. */
+.js .nav-logo {
+  opacity: 0;
+  transform: translateY(-4px);
+  pointer-events: none;
+  transition:
+    opacity 0.3s ease,
+    transform 0.3s ease;
+}
+.js [data-nav].is-scrolled .nav-logo {
+  opacity: 1;
+  transform: none;
+  pointer-events: auto;
+}
+
 /* Atmosfera: delikatne, ciągłe unoszenie (np. postacie w hero).
    Tylko gdy użytkownik nie prosił o ograniczenie ruchu. */
 @keyframes floaty {

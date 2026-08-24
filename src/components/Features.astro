@@ -10,18 +10,22 @@ const features = [
 ];
 ---
 
-<section class="bg-paper-lav text-ink px-4 py-16">
-  <div class="mx-auto max-w-5xl">
-    <SectionLabel text="Co wyróżnia grę „Zrolowani”" />
-    <div class="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+<section
+  class="bg-[linear-gradient(160deg,#241046_0%,#3a1a6e_100%)] px-4 py-16 text-white"
+>
+  <div class="mx-auto max-w-3xl">
+    <SectionLabel text="Co wyróżnia grę „Zrolowani”" class="text-brand-400" />
+    <ul class="mt-8 divide-y divide-white/10">
       {
         features.map((f) => (
-          <div class="border-brand-400/25 bg-paper rounded-2xl border p-5 hover:shadow-xl hover:shadow-black/10 motion-safe:transition motion-safe:duration-200 motion-safe:hover:-translate-y-1.5 motion-safe:hover:rotate-[-1deg]">
-            <h3 class="font-display text-ink text-lg font-extrabold">{f.title}</h3>
-            <p class="text-ink-soft mt-1 text-sm">{f.desc}</p>
-          </div>
+          <li class="flex flex-col gap-1 py-5 sm:flex-row sm:items-baseline sm:gap-8">
+            <h3 class="font-display shrink-0 text-lg font-extrabold text-white sm:w-56">
+              {f.title}
+            </h3>
+            <p class="text-white/70">{f.desc}</p>
+          </li>
         ))
       }
-    </div>
+    </ul>
   </div>
 </section>

@@ -1,9 +1,12 @@
-// Sticky nav: dodaje tło po przewinięciu.
+// Sticky nav: dodaje tło po przewinięciu. Klasa `is-scrolled` odsłania też
+// logo w nawigacji (na samej górze jest ukryte, by nie dublować logo z hero).
 const nav = document.querySelector('[data-nav]');
 const onScroll = () => {
   if (!nav) return;
-  nav.classList.toggle('bg-brand-950/90', window.scrollY > 8);
-  nav.classList.toggle('backdrop-blur', window.scrollY > 8);
+  const scrolled = window.scrollY > 8;
+  nav.classList.toggle('bg-brand-950/90', scrolled);
+  nav.classList.toggle('backdrop-blur', scrolled);
+  nav.classList.toggle('is-scrolled', scrolled);
 };
 onScroll();
 window.addEventListener('scroll', onScroll, { passive: true });
