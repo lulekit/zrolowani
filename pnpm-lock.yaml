@@ -54,6 +54,9 @@ importers:
       prettier-plugin-tailwindcss:
         specifier: ^0.8.1
         version: 0.8.1(prettier-plugin-astro@0.14.1)(prettier@3.9.5)
+      sharp:
+        specifier: ^0.35.3
+        version: 0.35.3
       tailwindcss:
         specifier: ^4.3.3
         version: 4.3.3
@@ -5054,7 +5057,6 @@ snapshots:
       '@img/sharp-win32-arm64': 0.35.3
       '@img/sharp-win32-ia32': 0.35.3
       '@img/sharp-win32-x64': 0.35.3
-    optional: true
 
   shebang-command@2.0.0:
     dependencies:

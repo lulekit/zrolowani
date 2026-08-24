@@ -6,11 +6,9 @@ beforeAll(() => {
   execSync('pnpm build', { stdio: 'inherit' });
 }, 180_000);
 
-// @astrojs/cloudflare zawsze dzieli wynik builda na dist/client (statyczne
-// assety) i dist/server (worker) — plik strony głównej trafia więc do
-// dist/client/index.html, nie do dist/index.html.
-test('dist/client/index.html zawiera wszystkie kotwice i kluczowe treści', () => {
-  const html = readFileSync('dist/client/index.html', 'utf8');
+// Static build (output: 'static') emits the home page at dist/index.html.
+test('dist/index.html zawiera wszystkie kotwice i kluczowe treści', () => {
+  const html = readFileSync('dist/index.html', 'utf8');
   expect(html).toContain('id="gra"');
   expect(html).toContain('id="zasady"');
   expect(html).toContain('id="pudelko"');
@@ -21,7 +19,7 @@ test('dist/client/index.html zawiera wszystkie kotwice i kluczowe treści', () =
 });
 
 test('brak zewnętrznego CDN fontów w wyprodukowanym HTML', () => {
-  const html = readFileSync('dist/client/index.html', 'utf8');
+  const html = readFileSync('dist/index.html', 'utf8');
   expect(html).not.toContain('fonts.googleapis.com');
   expect(html).not.toContain('fonts.gstatic.com');
 });

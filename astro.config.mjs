@@ -1,13 +1,13 @@
 // @ts-check
 import { defineConfig, fontProviders } from 'astro/config';
-import cloudflare from '@astrojs/cloudflare';
 import tailwindcss from '@tailwindcss/vite';
 
+// Static-only build: no Cloudflare adapter, no SSR. Deployable to any static
+// host (Cloudflare Pages, Netlify, GitHub Pages, nginx, S3, ...). Image
+// optimization falls back to the default sharp service at build time.
 export default defineConfig({
   site: 'https://zrolowani.pl',
-  adapter: cloudflare({
-    platformProxy: { enabled: true },
-  }),
+  output: 'static',
   fonts: [
     {
       provider: fontProviders.google(),
