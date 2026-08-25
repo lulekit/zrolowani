@@ -2,4 +2,4 @@
 export const ALLEGRO_URL = '';
 
 /** Kanoniczny adres strony (bez końcowego ukośnika). */
-export const SITE_URL = 'https://zrolowani.pl';
+export const SITE_URL = 'https://zrolowani.com.pl';

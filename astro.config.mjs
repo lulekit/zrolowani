@@ -6,7 +6,7 @@ import tailwindcss from '@tailwindcss/vite';
 // host (Cloudflare Pages, Netlify, GitHub Pages, nginx, S3, ...). Image
 // optimization falls back to the default sharp service at build time.
 export default defineConfig({
-  site: 'https://zrolowani.pl',
+  site: 'https://zrolowani.com.pl',
   output: 'static',
   fonts: [
     {
