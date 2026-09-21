@@ -141,9 +141,34 @@ html {
 .js [data-pop].is-pop > *:nth-child(6) {
   animation-delay: 0.35s;
 }
+/* Wariant „chmurki" (sekcja „Co wyróżnia grę"): zamiast skalowania wiersze
+   wjeżdżają kaskadowo z lewej. Korzysta z tego samego obserwatora `[data-pop]`
+   i opóźnień po nth-child — podmieniamy wyłącznie klatki kluczowe. Musi stać
+   przed regułą `prefers-reduced-motion`, żeby jej nie nadpisać. */
+@keyframes slide-in-left {
+  0% {
+    opacity: 0;
+    transform: translateX(-28px);
+  }
+  100% {
+    opacity: 1;
+    transform: none;
+  }
+}
+.js [data-pop='slide'].is-pop > * {
+  animation-name: slide-in-left;
+  animation-duration: 0.5s;
+  animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
 @media (prefers-reduced-motion: reduce) {
   .js [data-pop] > * {
     opacity: 1;
+  }
+  /* Selektory muszą mieć specyficzność nie niższą niż reguły animujące powyżej,
+     inaczej `animation: none` zostałoby przez nie nadpisane. */
+  .js [data-pop].is-pop > *,
+  .js [data-pop='slide'].is-pop > * {
     animation: none;
   }
 }
