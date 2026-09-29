@@ -1,15 +1,16 @@
 ---
 import '../styles/global.css';
 import { Font } from 'astro:assets';
-import { buildMeta } from '../lib/seo';
+import { buildMeta, OG_IMAGE } from '../lib/seo';
 
 interface Props {
   title?: string;
   description?: string;
   path?: string;
+  noindex?: boolean;
 }
-const { title, description, path } = Astro.props;
-const meta = buildMeta({ title, description, path });
+const { title, description, path, noindex } = Astro.props;
+const meta = buildMeta({ title, description, path, noindex });
 ---
 
 <!doctype html>
@@ -20,17 +21,26 @@ const meta = buildMeta({ title, description, path });
     </script>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#0b0616" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="canonical" href={meta.canonical} />
     <title>{meta.title}</title>
     <meta name="description" content={meta.description} />
+    {meta.noindex && <meta name="robots" content="noindex, follow" />}
     <meta property="og:type" content="website" />
+    <meta property="og:locale" content="pl_PL" />
+    <meta property="og:site_name" content="Zrolowani" />
     <meta property="og:title" content={meta.title} />
     <meta property="og:description" content={meta.description} />
     <meta property="og:url" content={meta.canonical} />
     <meta property="og:image" content={meta.ogImage} />
+    <meta property="og:image:width" content={String(OG_IMAGE.width)} />
+    <meta property="og:image:height" content={String(OG_IMAGE.height)} />
+    <meta property="og:image:alt" content="Pudełko i elementy gry Zrolowani" />
+    <meta name="twitter:card" content="summary_large_image" />
     <Font cssVariable="--font-heading" preload />
     <Font cssVariable="--font-body" />
+    <slot name="head" />
   </head>
   <body class="bg-brand-950 min-h-screen font-sans text-white antialiased">
     <slot />

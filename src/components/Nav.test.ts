@@ -21,3 +21,10 @@ test('nav: zakładki rozłożone równomiernie, przycisk KUP osobno', async () =
   const html = await container.renderToString(Nav);
   expect(html).toContain('justify-evenly');
 });
+
+test('nav: białe kreski przed, między i za zakładkami (dekoracyjne)', async () => {
+  const container = await AstroContainer.create();
+  const html = await container.renderToString(Nav);
+  const separators = html.match(/data-nav-sep/g) ?? [];
+  expect(separators).toHaveLength(4); // | Gra | Zasady | Pudełko |
+});

@@ -1,0 +1,6 @@
+# Canonical host: https://zrolowani.com.pl (one 301 hop from http:// and www.).
+# home.pl IdeaWebServer does not support %{SERVER_PORT}; %{HTTPS} is the supported check.
+RewriteEngine On
+RewriteCond %{HTTP_HOST} ^www\. [NC,OR]
+RewriteCond %{HTTPS} !=on
+RewriteRule ^(.*)$ https://zrolowani.com.pl/$1 [R=301,L]
