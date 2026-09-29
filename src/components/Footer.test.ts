@@ -9,6 +9,12 @@ test('stopka: dane producenta', async () => {
   expect(html).toContain('Plac Andersa 7');
 });
 
+test('stopka: podpis wykonawcy z linkiem do lulek.it', async () => {
+  const container = await AstroContainer.create();
+  const html = await container.renderToString(Footer);
+  expect(html).toMatch(/Realizacja: <a[^>]*href="https:\/\/lulek\.it"[^>]*>lulek\.it<\/a>/);
+});
+
 test('stopka: linki prawne są ukryte (zakomentowane)', async () => {
   const container = await AstroContainer.create();
   const html = await container.renderToString(Footer);
